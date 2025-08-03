@@ -13,6 +13,14 @@ uploaded_file = st.file_uploader("Upload CSV", type="csv")
 
 top_n = st.number_input("Show top N most likely fraudulent transactions", min_value=1, step=1, value=5)
 
+new_data.columns = new_data.columns.str.strip().str.lower()
+new_data.rename(columns={
+    'transaction_amount': 'transaction_amount',
+    'location': 'Location',
+    'age': 'Age',
+    'gender': 'Gender'
+}, inplace=True)
+
 if uploaded_file:
     new_data = pd.read_csv(uploaded_file)
     try:
